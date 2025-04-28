@@ -1,34 +1,264 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="109f985b-61c7-4075-8dfb-9ccc166d919b" name="Changes" comment="" />
+    <list default="true" id="109f985b-61c7-4075-8dfb-9ccc166d919b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/inne/scrap.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/inne/utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mt4_connector/command_sender.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mt4_connector/trade_defaults.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/heartbeat/send_heartbeat.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/historical/fetch_historical_for_all.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/historical/fetch_launcher.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/historical/fetch_single.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/historical/historical_data.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/live/live_data.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/run_mt4.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/trades/get_account_info.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/trades/get_open_trades.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/trades/open_trade.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_command.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_historical.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_mt4_push_recv.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_ping.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_port_5556..py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_recv.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_symbols.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/MT4_Trading_System.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/MT4_Trading_System.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/symbols.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/symbols.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mt4_connector/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/mt4_connector/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mt4_connector/base_connector.py" beforeDir="false" afterPath="$PROJECT_DIR$/mt4_connector/base_connector.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mt4_connector/historical_data_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/mt4_connector/historical_data_handler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mt4_connector/market_data_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/mt4_connector/market_data_handler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mt4_connector/trade_handler.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mt4_connector/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/timeframes.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/main_window.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 4
-}]]></component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;tomekbiel&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/tomekbiel/MT4_Trading_System.git&quot;,
+    &quot;accountId&quot;: &quot;f2b4c2ad-eaf1-4ba4-8504-e16fdb0289b2&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="2w0ftCBNRYlnvkBS9JcoOSR2qkd" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true"
+    "Python tests.Python tests for test_symbols.test_symbols_loaded.executor": "Run",
+    "Python tests.Python tests for test_symbols.test_timeframe_limits.executor": "Run",
+    "Python tests.Python tests in test_command.py.executor": "Run",
+    "Python tests.Python tests in test_import.py.executor": "Run",
+    "Python tests.Python tests in test_mt4_push_recv.py.executor": "Run",
+    "Python tests.Python tests in test_ping.py.executor": "Run",
+    "Python tests.Python tests in test_port.py.executor": "Run",
+    "Python tests.Python tests in test_recv.py.executor": "Run",
+    "Python tests.Python tests in test_symbols.py.executor": "Run",
+    "Python.DWX_ZeroMQ_Connector_v2_0_1_RC8.executor": "Run",
+    "Python.__init__.executor": "Run",
+    "Python.analyze.executor": "Run",
+    "Python.base_connector.executor": "Run",
+    "Python.command_sender.executor": "Run",
+    "Python.fetch_historical_for_all.executor": "Run",
+    "Python.fetch_launcher.executor": "Run",
+    "Python.fetch_one_symbol.executor": "Run",
+    "Python.fetch_single.executor": "Run",
+    "Python.get_account_info.executor": "Run",
+    "Python.get_open_trades.executor": "Run",
+    "Python.historical_data (1).executor": "Run",
+    "Python.historical_data.executor": "Run",
+    "Python.historical_data_handler.executor": "Run",
+    "Python.live_data (1).executor": "Run",
+    "Python.live_data.executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.market_data_handler.executor": "Run",
+    "Python.open_trade.executor": "Run",
+    "Python.run_mt4.executor": "Run",
+    "Python.scrap.executor": "Run",
+    "Python.send_heartbeat.executor": "Run",
+    "Python.trade_executor.executor": "Run",
+    "Python.trade_handler.executor": "Run",
+    "Python.trades_data.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "settings.editor.selected.configurable": "vcs.Git"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\python\MT4_Trading_System\scripts\trades" />
+      <recent name="C:\python\MT4_Trading_System\scripts\historical" />
+      <recent name="C:\python\MT4_Trading_System\scripts\live" />
+      <recent name="C:\python\MT4_Trading_System\tests" />
+      <recent name="C:\python\MT4_Trading_System" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.run_mt4">
+    <configuration name="fetch_launcher" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="MT4_Trading_System" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts/historical" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/historical/fetch_launcher.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="get_account_info" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="MT4_Trading_System" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts/trades" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/trades/get_account_info.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="get_open_trades" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="MT4_Trading_System" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts/trades" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/trades/get_open_trades.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="open_trade" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="MT4_Trading_System" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts/trades" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/trades/open_trade.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="run_mt4" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="MT4_Trading_System" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/run_mt4.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.run_mt4" />
+        <item itemvalue="Python.open_trade" />
+        <item itemvalue="Python.get_account_info" />
+        <item itemvalue="Python.get_open_trades" />
+        <item itemvalue="Python.fetch_launcher" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-4f4e415b4190-aa17d162503b-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-243.26053.29" />
+        <option value="bundled-python-sdk-348a24fa61fa-5312c7369657-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-251.23774.444" />
       </set>
     </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration>C:\Users\tomas\AppData\Roaming\Subversion</configuration>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="109f985b-61c7-4075-8dfb-9ccc166d919b" name="Changes" comment="" />
