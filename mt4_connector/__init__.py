@@ -26,7 +26,7 @@ DEFAULT_CONFIG = {
     'NETWORK': {
         'host': 'localhost',
         'protocol': 'tcp',
-        'timeout': 3000,  # ms
+        'timeout': 10000,  # ms
         'retries': 5,
         'retry_delay': 2.0,
         'sleep_delay': 0.25  # seconds

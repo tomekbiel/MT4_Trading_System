@@ -19,7 +19,7 @@ def main():
 
     time.sleep(1)  # ⏳ chwilka na stabilizację socketów
 
-    command = "TRADE;GET_OPEN_TRADES"
+    command = "HIST;US.100+;M15;2024.01.01;2025.04.25"
     success = connector.send(command)
 
     if not success:

@@ -10,7 +10,7 @@ from mt4_connector.command_sender import MT4CommandSender
 START_DATE = "2022.01.01"  # 📕 Od kiedy pobieramy dane
 END_DATE = "2024.10.28"     # 📖 Do kiedy pobieramy dane
 END_TIME = "10:35"          # Opcjonalnie: konkretna godzina
-TIMEFRAMES = ["M1", "M5", "H1", "D1"]
+TIMEFRAMES = ["M1"]
 
 # 🛠️ Ladowanie symboli
 

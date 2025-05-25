@@ -34,7 +34,7 @@ def run_mode(choice):
         live_main()
 
     elif choice == "3":
-        from scripts.historical.historical_data import main as hist_main
+        from scripts.historical.fetch_single_2 import main as hist_main
         hist_main()
 
     elif choice == "4":

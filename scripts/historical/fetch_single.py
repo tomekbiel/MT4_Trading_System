@@ -3,110 +3,193 @@ import sys
 import time
 import json
 from datetime import datetime
+from collections import Counter
 from mt4_connector.command_sender import MT4CommandSender
 
-# 🔧 Dynamiczne ładowanie symbolu i timeframe
-
+# 📥 Ładowanie symbolu i interwału z plików JSON
 def load_symbol_and_timeframe():
-    symbol = os.environ.get("SYMBOL", None)
-    timeframe = os.environ.get("TIMEFRAME", None)
-
-    if symbol and timeframe:
-        return symbol, timeframe
-
-    # fallback - ładowanie domyślnego symbolu i timeframe z plików json
     base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
-
-    # ładuj symbole
     symbols_path = os.path.join(base_dir, 'config', 'symbols.json')
-    with open(symbols_path, "r", encoding="utf-8") as f:
+    timeframes_path = os.path.join(base_dir, 'config', 'timeframes.json')
+
+    with open(symbols_path, encoding="utf-8") as f:
         symbols = json.load(f).get("symbols", [])
 
-    # ładuj timeframe'y
-    timeframes_path = os.path.join(base_dir, 'config', 'timeframes.json')
-    with open(timeframes_path, "r", encoding="utf-8") as f:
-        timeframes = json.load(f).get("timeframes", [])
+    with open(timeframes_path, encoding="utf-8") as f:
+        valid_timeframes = json.load(f).get("timeframes", [])
 
-    # fallback: pierwszy symbol i pierwszy timeframe
-    return symbols[0], timeframes[0]
+    print("\n📌 Dostępne symbole:")
+    for i, s in enumerate(symbols):
+        print(f"{i + 1}. {s}")
 
-# 📂 Funkcja do tworzenia folderu docelowego
+    default_symbol = "US.100+"
+    default_timeframe = "M1"
 
+    symbol_input = input(f"\nWybierz symbol (ENTER = {default_symbol}): ").strip()
+    symbol = symbol_input if symbol_input else default_symbol
+
+    if symbol not in symbols:
+        print(f"⚠️ Symbol '{symbol}' nie znajduje się na liście – używam domyślnego: {default_symbol}")
+        symbol = default_symbol
+
+    timeframe_input = input(f"Wybierz interwał czasowy (ENTER = {default_timeframe}): ").strip()
+    timeframe = timeframe_input if timeframe_input else default_timeframe
+
+    if timeframe not in valid_timeframes:
+        print(f"⚠️ Interwał '{timeframe}' nieobsługiwany – używam domyślnego: {default_timeframe}")
+        timeframe = default_timeframe
+
+    return symbol, timeframe, valid_timeframes
+
+# 📂 Tworzy folder docelowy
 def ensure_directory(symbol, timeframe):
     base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
     path = os.path.join(base_dir, 'data', 'historical', symbol, timeframe)
     os.makedirs(path, exist_ok=True)
     return path
 
-# 📅 Zapis danych do pliku CSV
+# 🕒 Pobiera ostatni znany znacznik czasu
+def get_last_timestamp(filepath):
+    if not os.path.exists(filepath):
+        return None
+    with open(filepath, "r", encoding="utf-8") as f:
+        lines = f.readlines()
+        if len(lines) < 2:
+            return None
+        last_line = lines[-1].strip()
+        if not last_line:
+            return None
+        return last_line.split(',')[0]
 
-def save_data(symbol, timeframe, data, timestamp=None):
-    if timestamp is None:
-        timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+# 🧠 Wykrywa realny interwał na podstawie różnic między świecami
+def detect_actual_timeframe(data):
+    if len(data) < 2:
+        return None
+
+    try:
+        # Próba parsowania z godzinami i minutami
+        times = [datetime.strptime(row['time'], "%Y.%m.%d %H:%M") for row in data]
+        diffs = [(times[i + 1] - times[i]).seconds for i in range(len(times) - 1)]
+
+        # Jeśli wszystkie różce są 0, sprawdzamy różnicę w dniach
+        if all(diff == 0 for diff in diffs):
+            day_diffs = [(times[i + 1] - times[i]).days for i in range(len(times) - 1)]
+            most_common_day_diff = Counter(day_diffs).most_common(1)[0][0] if day_diffs else None
+
+            if most_common_day_diff == 1:
+                return 'D1'
+            elif most_common_day_diff == 7:
+                return 'W1'
+            elif most_common_day_diff == 30:
+                return 'MN1'
+            else:
+                return f"UNKNOWN({most_common_day_diff} days)"
+
+        most_common = Counter(diffs).most_common(1)[0][0] if diffs else None
+        tf_map = {
+            60: 'M1',
+            300: 'M5',
+            900: 'M15',
+            1800: 'M30',
+            3600: 'H1',
+            14400: 'H4',
+            86400: 'D1',
+            604800: 'W1',
+            2592000: 'MN1'
+        }
+        return tf_map.get(most_common, f"UNKNOWN({most_common}s)")
+
+    except ValueError:
+        # Jeśli parsowanie z godzinami i minutami się nie uda, próbujemy tylko datę
+        try:
+            times = [datetime.strptime(row['time'].split()[0], "%Y.%m.%d") for row in data]
+            day_diffs = [(times[i + 1] - times[i]).days for i in range(len(times) - 1)]
+            most_common_day_diff = Counter(day_diffs).most_common(1)[0][0] if day_diffs else None
+
+            if most_common_day_diff == 1:
+                return 'D1'
+            elif most_common_day_diff == 7:
+                return 'W1'
+            elif most_common_day_diff == 30:
+                return 'MN1'
+            else:
+                return f"UNKNOWN({most_common_day_diff} days)"
+        except Exception as e:
+            print(f"Błąd podczas wykrywania interwału: {e}")
+            return None
+
+# 💾 Zapisuje dane (jeśli interwał się zgadza)
+def save_data(symbol, timeframe, data):
     directory = ensure_directory(symbol, timeframe)
-    filename = f"{symbol}_{timeframe}_{timestamp}.csv"
-    filepath = os.path.join(directory, filename)
+    filepath = os.path.join(directory, f"{symbol}_{timeframe}.csv")
+    last_ts = get_last_timestamp(filepath)
+    new_rows = []
 
-    with open(filepath, "w", encoding="utf-8") as f:
-        f.write("time,open,high,low,close,tick_volume,spread,real_volume\n")
-        for row in data:
-            f.write(
+    for row in data:
+        if last_ts is None or row["time"] > last_ts:
+            new_rows.append(
                 f"{row['time']},{row['open']},{row['high']},{row['low']}," +
                 f"{row['close']},{row['tick_volume']},{row['spread']},{row['real_volume']}\n"
             )
 
-    print(f"✅ Zapisano dane do pliku: {filepath}")
+    if not new_rows:
+        print("ℹ️ Brak nowych danych do dopisania.")
+        return
 
-# ⚖️ Główna funkcja pobierania jednego symbolu/timeframe
+    mode = "a" if os.path.exists(filepath) else "w"
+    with open(filepath, mode, encoding="utf-8") as f:
+        if mode == "w":
+            f.write("time,open,high,low,close,tick_volume,spread,real_volume\n")
+        f.writelines(new_rows)
 
-def fetch_single():
-    symbol, timeframe = load_symbol_and_timeframe()
+    print(f"✅ Dopisano {len(new_rows)} świec do: {filepath}")
 
-    print(f"🚀 Pobieram: {symbol} {timeframe}")
-
+# 🚀 Główna funkcja
+def fetch_single(symbol, timeframe, valid_timeframes):
+    print(f"\n🚀 Pobieram dane: {symbol} {timeframe}")
     connector = MT4CommandSender(client_id="historical_fetch_single", verbose=True)
-    time.sleep(1)
+    time.sleep(5)
 
     start_date = "2001.01.01"
     end_date = datetime.today().strftime("%Y.%m.%d")
-
     success = connector.send_historical_data(symbol, timeframe, start_date, end_date)
 
     if not success:
         print(f"❌ Nie udało się wysłać komendy dla {symbol} {timeframe}")
         connector.shutdown()
-        sys.exit(0)
+        sys.exit(1)
 
     response = connector.receive(timeout=10)
 
     if response:
         try:
-            response_fixed = response.replace("'", '"')
-            response_fixed = response_fixed.replace("False", "false").replace("True", "true")
-
+            response_fixed = response.replace("'", '"').replace("False", "false").replace("True", "true")
             if "}{" in response_fixed:
-                parts = response_fixed.split("}{")
-                response_fixed = parts[0] + "}"
+                response_fixed = response_fixed.split("}{")[0] + "}"
 
             parsed = json.loads(response_fixed)
 
             if "_response" in parsed and parsed["_response"] == "NOT_AVAILABLE":
-                print(f"⚠️ Symbol {symbol} {timeframe} niedostępny (NOT_AVAILABLE)")
+                print(f"⚠️ Symbol {symbol} {timeframe} niedostępny")
             elif "_data" in parsed:
-                now = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-                save_data(symbol, timeframe, parsed["_data"], now)
+                actual_tf = detect_actual_timeframe(parsed["_data"])
+                if actual_tf != timeframe:
+                    print(f"⚠️ Rzeczywisty interwał danych to {actual_tf}, a nie {timeframe}. Dane NIE zostaną zapisane.")
+                elif actual_tf not in valid_timeframes:
+                    print(f"⚠️ Rzeczywisty interwał {actual_tf} nie znajduje się na liście dozwolonych interwałów.")
+                else:
+                    save_data(symbol, timeframe, parsed["_data"])
             else:
-                print(f"⚠️ Brak danych _data dla {symbol} {timeframe}")
-
+                print("⚠️ Brak danych _data w odpowiedzi.")
         except Exception as e:
-            print(f"❌ Błąd parsowania danych: {e}")
-
+            print(f"❌ Błąd parsowania odpowiedzi: {e}")
     else:
-        print(f"⚠️ Brak odpowiedzi na {symbol} {timeframe}")
+        print(f"⚠️ Brak odpowiedzi z MT4 dla {symbol} {timeframe}")
 
     connector.shutdown()
-    time.sleep(2)
-    sys.exit(0)
+    time.sleep(5)
 
+# ▶️ Start
 if __name__ == "__main__":
-    fetch_single()
+    symbol, timeframe, valid_timeframes = load_symbol_and_timeframe()
+    fetch_single(symbol, timeframe, valid_timeframes)
