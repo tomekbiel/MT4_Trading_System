@@ -137,7 +137,9 @@ def get_last_trading_day():
 
 def needs_update(filepath, timeframe):
     """
-    Check if file needs update based on timeframe and trading days
+    Check if file needs update according to MT4's behavior:
+    - On weekdays: single 00:00 entry for current day
+    - On weekend: treat Friday's data as current until Sunday midnight
     Args:
         filepath: Path to data file
         timeframe: Selected timeframe (e.g. 'M1', 'D1')
@@ -156,16 +158,27 @@ def needs_update(filepath, timeframe):
         last_dt = datetime.strptime(last_ts, "%Y.%m.%d %H:%M" if ' ' in last_ts else "%Y.%m.%d")
         current_dt = datetime.now()
 
-        # Different logic for different timeframes
+        # Adjust for timezone difference (Ireland is 1h behind Poland)
+        adjusted_now = current_dt + timedelta(hours=1)
+        adjusted_now_date = adjusted_now.date()
+        adjusted_now_weekday = adjusted_now.weekday()  # 0=Monday, 6=Sunday
+
         if timeframe == 'D1':
-            # For daily data, compare trading days
-            return last_dt.date() < get_last_trading_day()
+            # For daily data, compare dates only
+            return last_dt.date() < adjusted_now_date
+
         elif timeframe in ['M1', 'M5', 'M15', 'M30', 'H1', 'H4']:
-            # For intraday data, check if last data is older than 4 hours
-            return (current_dt - last_dt) > timedelta(hours=4)
-        else:
-            # For other timeframes (W1, MN1), weekly/monthly checks
-            return last_dt.date() < current_dt.date()
+            # For intraday data
+            if adjusted_now_weekday < 5:  # Monday to Friday
+                # Check if we have today's 00:00 entry
+                return last_dt.date() < adjusted_now_date
+            else:  # Weekend (Saturday/Sunday)
+                last_friday = adjusted_now - timedelta(days=adjusted_now_weekday - 4)
+                # Accept any Friday's data during weekend
+                return last_dt.date() < last_friday.date()
+
+        else:  # W1, MN1
+            return last_dt.date() < adjusted_now_date
 
     except Exception as e:
         print(f"⚠️ Error checking update status: {e}")
