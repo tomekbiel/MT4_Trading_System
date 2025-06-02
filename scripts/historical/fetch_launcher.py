@@ -138,7 +138,7 @@ def get_last_trading_day():
 def needs_update(filepath, timeframe):
     """
     Check if file needs update according to MT4's behavior:
-    - On weekdays: single 00:00 entry for current day
+    - For D1: Only update on trading days after market close
     - On weekend: treat Friday's data as current until Sunday midnight
     Args:
         filepath: Path to data file
@@ -154,7 +154,7 @@ def needs_update(filepath, timeframe):
         return True
 
     try:
-        # Parse last timestamp
+        # Parse last timestamp from file
         last_dt = datetime.strptime(last_ts, "%Y.%m.%d %H:%M" if ' ' in last_ts else "%Y.%m.%d")
         current_dt = datetime.now()
 
@@ -163,22 +163,44 @@ def needs_update(filepath, timeframe):
         adjusted_now_date = adjusted_now.date()
         adjusted_now_weekday = adjusted_now.weekday()  # 0=Monday, 6=Sunday
 
-        if timeframe == 'D1':
-            # For daily data, compare dates only
-            return last_dt.date() < adjusted_now_date
+        # Get last trading day (returns Friday for weekends)
+        last_trading_day = get_last_trading_day()
 
-        elif timeframe in ['M1', 'M5', 'M15', 'M30', 'H1', 'H4']:
-            # For intraday data
+        # For D1 timeframe
+        if timeframe == 'D1':
+            # Check if we already have data for the last trading day
+            if last_dt.date() >= last_trading_day:
+                return False
+
+            # For weekdays after market close (after 18:00) or next day
             if adjusted_now_weekday < 5:  # Monday to Friday
-                # Check if we have today's 00:00 entry
+                if adjusted_now.hour >= 18:  # After market close
+                    # We should have today's data
+                    return last_dt.date() < adjusted_now_date
+                else:
+                    # Before market close, check if we have yesterday's data
+                    return last_dt.date() < (adjusted_now_date - timedelta(days=1))
+            else:  # Weekend
+                # On weekend, we should have Friday's data
+                last_friday = adjusted_now_date - timedelta(days=adjusted_now_weekday - 4)
+                return last_dt.date() < last_friday
+
+        # For intraday timeframes
+        elif timeframe in ['M1', 'M5', 'M15', 'M30', 'H1', 'H4']:
+            if last_dt.date() >= last_trading_day:
+                return False
+
+            if adjusted_now_weekday < 5:  # Monday to Friday
                 return last_dt.date() < adjusted_now_date
             else:  # Weekend (Saturday/Sunday)
                 last_friday = adjusted_now - timedelta(days=adjusted_now_weekday - 4)
-                # Accept any Friday's data during weekend
                 return last_dt.date() < last_friday.date()
 
+        # For weekly/monthly timeframes
         else:  # W1, MN1
-            return last_dt.date() < adjusted_now_date
+            if last_dt.date() >= adjusted_now_date:
+                return False
+            return True
 
     except Exception as e:
         print(f"⚠️ Error checking update status: {e}")
@@ -198,11 +220,56 @@ def verify_timeframe(data, requested_tf):
         return False, "INSUFFICIENT_DATA"
 
     try:
-        # Parse timestamps
-        times = [datetime.strptime(row['time'], "%Y.%m.%d %H:%M") for row in data]
-        diffs = [(times[i + 1] - times[i]).seconds for i in range(len(times) - 1)]
+        # Parse timestamps with special handling for D1
+        times = []
+        for row in data:
+            try:
+                # Handle both formats: with and without time
+                ts = row['time']
+                if ' ' in ts:
+                    # Try parsing with time first
+                    try:
+                        dt = datetime.strptime(ts, "%Y.%m.%d %H:%M")
+                    except ValueError:
+                        # Fallback to date only if time parsing fails
+                        dt = datetime.strptime(ts.split()[0], "%Y.%m.%d")
+                else:
+                    dt = datetime.strptime(ts, "%Y.%m.%d")
+                times.append(dt)
+            except ValueError as e:
+                print(f"⚠️ Failed to parse timestamp {row['time']}: {e}")
+                continue
 
-        # Find most common interval
+        if len(times) < 2:
+            return False, "INVALID_TIMESTAMPS"
+
+        # Special handling for daily (D1) timeframe - SIMPLIFIED VERSION
+        if requested_tf == 'D1':
+            # Calculate day differences (skip time part)
+            day_diffs = []
+            prev_date = times[0].date()
+
+            for dt in times[1:]:
+                current_date = dt.date()
+                day_diff = (current_date - prev_date).days
+                day_diffs.append(day_diff)
+                prev_date = current_date
+
+            # Find most common day difference
+            if not day_diffs:
+                return False, "NO_DAY_DIFFS"
+
+            most_common = Counter(day_diffs).most_common(1)[0][0]
+
+            # Accept if most common difference is 1 day (allowing some gaps)
+            if most_common == 1:
+                return True, 'D1'
+            else:
+                return False, f'DAY_GAP_{most_common}d'
+
+        # Original logic for other timeframes
+        diffs = [(times[i + 1] - times[i]).total_seconds() for i in range(len(times) - 1)]
+
         if not diffs:
             return False, "NO_INTERVALS"
 
