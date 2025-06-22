@@ -446,7 +446,7 @@ def main():
     # Connect to MT4
     print("\n⏳ Connecting to MT4...")
     connector = MT4CommandSender(client_id="historical_fetcher", verbose=True)
-    time.sleep(5)  # Connection stabilization
+    time.sleep(3)  # Connection stabilization
 
     # Process symbols needing updates
     print(f"\n🔄 Updating {len(to_update)} symbols:")

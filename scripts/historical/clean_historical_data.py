@@ -5,7 +5,7 @@ from collections import defaultdict
 
 
 def load_symbols():
-    """Load symbols from configuration file"""
+    """Load symbols from a configuration file"""
     base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
     path = os.path.join(base_dir, 'config', 'symbols.json')
 
@@ -37,14 +37,51 @@ def get_data_path(symbol, timeframe):
 
 
 def parse_timestamp(ts):
-    """Parse timestamp from string with flexible format"""
+    """Parse timestamp from string with flexible format
+    Supported formats:
+    - YYYY.MM.DD HH:MM
+    - YYYY/MM/DD HH:MM
+    - YYYY-MM-DD HH:MM:SS
+    - YYYY.MM.DD
+    - YYYY/MM/DD
+    - YYYY-MM-DD
+    """
+    if not isinstance(ts, str):
+        return None
+
+    # List of formats to check
+    formats = [
+        "%Y-%m-%d %H:%M:%S",  # YYYY-MM-DD HH:MM:SS
+        "%Y.%m.%d %H:%M",     # YYYY.MM.DD HH:MM
+        "%Y/%m/%d %H:%M",     # YYYY/MM/DD HH:MM
+        "%Y-%m-%d",           # YYYY-MM-DD
+        "%Y.%m.%d",           # YYYY.MM.DD
+        "%Y/%m/%d"            # YYYY/MM/DD
+    ]
+    
+    for fmt in formats:
+        try:
+            return datetime.strptime(ts.strip(), fmt)
+        except ValueError:
+            continue
+
+    # If no format matches, try to normalize separators
     try:
-        return datetime.strptime(ts, "%Y.%m.%d %H:%M")
+        # Try to convert all separators to dots and check again
+        normalized_ts = ts.replace('-', '.').replace('/', '.')
+        return datetime.strptime(normalized_ts, "%Y.%m.%d %H:%M:%S")
     except ValueError:
         try:
-            return datetime.strptime(ts, "%Y.%m.%d")
+            return datetime.strptime(normalized_ts, "%Y.%m.%d %H:%M")
         except ValueError:
-            return None
+            try:
+                return datetime.strptime(normalized_ts, "%Y.%m.%d")
+            except ValueError:
+                pass
+
+    # If still unable to parse, display the message and return None
+    print(f"⚠️ Could not parse timestamp: {ts}")
+    return None
 
 
 def clean_and_sort_csv(filepath):
@@ -52,7 +89,7 @@ def clean_and_sort_csv(filepath):
     Clean and sort CSV file:
     1. Remove duplicates by timestamp
     2. Sort chronologically
-    3. Preserve original structure
+    3. Preserve the original structure
     """
     if not os.path.exists(filepath):
         print(f"⚠️ File not found: {filepath}")
@@ -89,9 +126,17 @@ def clean_and_sort_csv(filepath):
 
     # Sort by timestamp
     sorted_timestamps = sorted(unique_data.keys())
-    sorted_data = [unique_data[ts] for ts in sorted_timestamps]
 
-    # Write back to file
+    # Prepare data for writing, formatting timestamp to YYYY.MM.DD HH:MM
+    sorted_data = []
+    for ts in sorted_timestamps:
+        row = unique_data[ts].copy()
+        # Formatuj timestamp do pożądanego formatu
+        formatted_ts = ts.strftime("%Y.%m.%d %H:%M")
+        row[0] = formatted_ts  # Pierwsza kolumna to timestamp
+        sorted_data.append(row)
+
+    # Write back to the file
     with open(filepath, "w", encoding="utf-8", newline='') as f:
         writer = csv.writer(f)
         writer.writerow(header)

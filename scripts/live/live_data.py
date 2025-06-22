@@ -1,11 +1,11 @@
 # scripts/live_data.py
 from mt4_connector import MT4MarketDataHandler
 import time
-import keyboard  # wymaga instalacji: pip install keyboard
+import keyboard  # requires installation: pip install keyboard
 
 
 def main():
-    print("🟢 MT4 Connector LIVE DATA - Naciśnij ESC aby zatrzymać")
+    print("🟢 MT4 Connector LIVE DATA - Press ESC to stop")
     handler = MT4MarketDataHandler(
         csv_output_dir='../../data/live',
         save_to_csv=True,
@@ -18,7 +18,7 @@ def main():
             time.sleep(0.1)
     finally:
         handler.shutdown()
-        print("🔴 Zatrzymano pobieranie danych")
+        print("🔴 Data collection stopped")
 
 
 if __name__ == "__main__":
