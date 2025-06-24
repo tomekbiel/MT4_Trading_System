@@ -93,7 +93,7 @@ class MT4MarketDataHandler(MT4BaseConnector):
         The CSV will have columns: timestamp, bid, ask
         """
         if symbol not in self.csv_writers:
-            filename = os.path.join(self.csv_output_dir, f"{symbol.replace('+', '')}.csv")
+            filename = os.path.join(self.csv_output_dir, f"{symbol}.csv")
             file_exists = os.path.exists(filename)
 
             csv_file = open(filename, 'a', newline='')
