@@ -124,13 +124,29 @@ def save_data(symbol, timeframe, data):
     filepath = os.path.join(directory, f"{symbol}_{timeframe}.csv")
     last_ts = get_last_timestamp(filepath)
     new_rows = []
+    skipped_count = 0
+    
+    print(f"\n💾 Saving data to: {filepath}")
+    print(f"📅 Last timestamp in file: {last_ts or 'No existing file'}")
+    print(f"📊 Processing {len(data)} rows of data...")
 
     for row in data:
-        if last_ts is None or row["time"] > last_ts:
+        row_time = row["time"]
+        if last_ts is None or row_time > last_ts:
             new_rows.append(
-                f"{row['time']},{row['open']},{row['high']},{row['low']}," +
+                f"{row_time},{row['open']},{row['high']},{row['low']}," +
                 f"{row['close']},{row['tick_volume']},{row['spread']},{row['real_volume']}\n"
             )
+        else:
+            skipped_count += 1
+            if skipped_count <= 5:  # Log first 5 skipped rows
+                print(f"  ⏩ Skipping row (not newer than last_ts): {row_time}")
+    
+    if skipped_count > 5:
+        print(f"  ... and {skipped_count - 5} more rows skipped")
+
+    print(f"📝 Found {len(new_rows)} new rows to append")
+    print(f"⏭️  Skipped {skipped_count} existing rows")
 
     if not new_rows:
         print("ℹ️ No new data to append.")
