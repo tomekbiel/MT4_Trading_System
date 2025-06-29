@@ -4,12 +4,56 @@ from pathlib import Path
 import os
 from datetime import datetime, timedelta
 import sys
+import matplotlib.pyplot as plt
 
 # Konfiguracja
 BASE_DIR = Path(r"C:\python\MT4_Trading_System\data\historical")
-TIMEFRAME = 'M5'
 LAST_HOURS_TO_KEEP = 72  # Ostatnie godziny danych, które uznajemy za wiarygodne
 MAX_PRICE_CHANGE_PCT = 50  # Maksymalna akceptowalna zmiana ceny w %
+
+def get_available_timeframes():
+    """Pobierz dostępne ramy czasowe z katalogu danych"""
+    if not BASE_DIR.exists():
+        return []
+    
+    # Pobierz pierwszy dostępny symbol
+    symbols = [d for d in os.listdir(BASE_DIR) 
+              if (BASE_DIR / d).is_dir() and not d.startswith('.')]
+    
+    if not symbols:
+        return []
+    
+    # Pobierz ramy czasowe z pierwszego symbola
+    timeframes_dir = BASE_DIR / symbols[0]
+    timeframes = [d for d in os.listdir(timeframes_dir) 
+                 if (timeframes_dir / d).is_dir() and not d.startswith('.')]
+    
+    return sorted(timeframes, key=lambda x: (len(x), x))
+
+def select_timeframe():
+    """Pozwól użytkownikowi wybrać ramę czasową"""
+    timeframes = get_available_timeframes()
+    
+    if not timeframes:
+        print("Nie znaleziono dostępnych ram czasowych.")
+        return None
+    
+    print("\nDostępne ramy czasowe:")
+    for i, tf in enumerate(timeframes, 1):
+        print(f"{i}. {tf}")
+    
+    while True:
+        try:
+            choice = input("\nWybierz numer ramy czasowej: ")
+            if not choice.strip():
+                return timeframes[0]  # Domyślnie pierwsza rama czasowa
+                
+            choice_idx = int(choice) - 1
+            if 0 <= choice_idx < len(timeframes):
+                return timeframes[choice_idx]
+            print("Nieprawidłowy wybór. Spróbuj ponownie.")
+        except ValueError:
+            print("Proszę wprowadzić liczbę.")
 
 def clear_screen():
     """Czyści ekran konsoli"""
@@ -38,9 +82,9 @@ def load_data(filepath):
     except Exception as e:
         return None, f"Błąd wczytywania: {e}"
 
-def analyze_file(symbol):
+def analyze_file(symbol, timeframe):
     """Analizuje pojedynczy plik CSV"""
-    file_path = BASE_DIR / symbol / TIMEFRAME / f"{symbol}_{TIMEFRAME}.csv"
+    file_path = BASE_DIR / symbol / timeframe / f"{symbol}_{timeframe}.csv"
     if not file_path.exists():
         return None, None, None, f"Nie znaleziono pliku: {file_path}"
     
@@ -72,38 +116,52 @@ def analyze_file(symbol):
     
     return df, last_valid, anomalies, None
 
-def clean_and_save(df, anomalies, symbol):
-    """Usuwa anomalię i zapisuje dane"""
+def clean_and_save(df, anomalies, symbol, timeframe):
+    """Usuwa anomalię i zapisuje dane, zachowując oryginalny format znacznika czasu"""
     if df is None or anomalies is None or anomalies.empty:
         return False, "Brak danych do zapisania"
     
     try:
-        # Usuń anomalię
-        clean_df = df[~df.index.isin(anomalies.index)]
+        # Utwórz kopię danych bez anomali
+        clean_df = df[~df.index.isin(anomalies.index)].copy()
         
-        # Zapisz z powrotem do pliku z odpowiednim formatem daty
-        file_path = BASE_DIR / symbol / TIMEFRAME / f"{symbol}_{TIMEFRAME}.csv"
+        # Ścieżka do pliku docelowego
+        file_path = BASE_DIR / symbol / timeframe / f"{symbol}_{timeframe}.csv"
         
-        # Konwersja daty do odpowiedniego formatu
-        clean_df.index = clean_df.index.strftime('%Y.%m.%d %H:%M')
+        # Sprawdź, czy plik źródłowy ma nagłówek
+        has_header = False
+        try:
+            with open(file_path, 'r') as f:
+                first_line = f.readline().strip()
+                if first_line.startswith('time,') or first_line.startswith('date,'):
+                    has_header = True
+        except Exception:
+            pass
         
-        # Zapis do pliku bez dodatkowych cudzysłowów i z odpowiednim formatem
-        clean_df.to_csv(file_path, index=True, header=True, quoting=0, quotechar='\0')
-        
-        # Ponowne wczytanie i zapisanie, aby upewnić się, że format jest poprawny
-        clean_df = pd.read_csv(file_path, parse_dates=[0], index_col=0)
-        clean_df.index = pd.to_datetime(clean_df.index).strftime('%Y.%m.%d %H:%M')
-        clean_df.to_csv(file_path, date_format='%Y.%m.%d %H:%M', index=True, header=True, quoting=0, quotechar='\0')
+        # Zapisz dane z odpowiednim formatem daty i nagłówkiem
+        if has_header:
+            # Zapis z nagłówkiem
+            clean_df.to_csv(file_path, 
+                          date_format='%Y.%m.%d %H:%M', 
+                          index=True, 
+                          header=True,
+                          index_label='time')
+        else:
+            # Zapis bez nagłówka
+            clean_df.to_csv(file_path, 
+                          date_format='%Y.%m.%d %H:%M', 
+                          index=True, 
+                          header=False)
         
         return True, f"Usunięto {len(anomalies)} wierszy i zapisano plik"
     except Exception as e:
         return False, f"Błąd podczas zapisywania: {e}"
 
-def print_analysis(symbol, df, last_valid, anomalies, error=None):
+def print_analysis(symbol, df, last_valid, anomalies, error=None, timeframe=None):
     """Wyświetla wyniki analizy dla pojedynczego pliku"""
     clear_screen()
     print("\n" + "="*80)
-    print(f"ANALIZA: {symbol} - {TIMEFRAME}".center(80))
+    print(f"ANALIZA: {symbol} - {timeframe if timeframe else 'N/A'}".center(80))
     print("="*80)
     
     if error:
@@ -134,12 +192,12 @@ def print_analysis(symbol, df, last_valid, anomalies, error=None):
     else:
         print("\n✅ Nie znaleziono żadnych anomalii w danych.")
 
-def process_symbol(symbol):
-    """Przetwarza pojedynczy symbol"""
-    df, last_valid, anomalies, error = analyze_file(symbol)
+def process_symbol(symbol, timeframe):
+    """Przetwarza pojedynczy symbol dla wybranej ramy czasowej"""
+    df, last_valid, anomalies, error = analyze_file(symbol, timeframe)
     
     while True:
-        print_analysis(symbol, df, last_valid, anomalies, error)
+        print_analysis(symbol, df, last_valid, anomalies, error, timeframe)
         
         if error or anomalies is None or anomalies.empty:
             break
@@ -153,12 +211,12 @@ def process_symbol(symbol):
         choice = input("\nTwój wybór (d/n/q): ").strip().lower()
         
         if choice == 'd':
-            success, message = clean_and_save(df, anomalies, symbol)
+            success, message = clean_and_save(df, anomalies, symbol, timeframe)
             if success:
                 print(f"\n✅ {message}")
                 input("\nNaciśnij Enter, aby kontynuować...")
                 # Po usunięciu, przeładuj dane i sprawdź ponownie
-                df, last_valid, anomalies, error = analyze_file(symbol)
+                df, last_valid, anomalies, error = analyze_file(symbol, timeframe)
                 if not anomalies.empty:
                     print("\n⚠️  Nadal istnieją anomalię. Sprawdź ponownie.")
                     input("Naciśnij Enter, aby kontynuować...")
@@ -176,7 +234,29 @@ def process_symbol(symbol):
     
     return False  # Kontynuuj z następnym symbolem
 
+def load_timeframes():
+    """Wczytuje dostępne ramy czasowe z pliku konfiguracyjnego"""
+    try:
+        config_path = BASE_DIR.parent.parent / 'config' / 'timeframes.json'
+        with open(config_path, 'r') as f:
+            config = json.load(f)
+        return config.get('timeframes', ['M1', 'M5', 'M15', 'H1', 'H4', 'D1'])
+    except Exception as e:
+        print(f"Błąd wczytywania konfiguracji ram czasowych, używam domyślnych: {e}")
+        return ['M1', 'M5', 'M15', 'H1', 'H4', 'D1']
+
 def main():
+    # Wczytaj dostępne ramy czasowe
+    timeframes = load_timeframes()
+    print("Dostępne ramy czasowe:", ", ".join(timeframes))
+    
+    # Wybierz ramę czasową
+    while True:
+        timeframe = input("\nWybierz ramę czasową (np. M5, H1, D1): ").strip().upper()
+        if timeframe in timeframes:
+            break
+        print(f"Nieprawidłowa rama czasowa. Wybierz spośród: {', '.join(timeframes)}")
+    
     # Znajdź wszystkie dostępne symbole
     symbols = [d.name for d in BASE_DIR.iterdir() if d.is_dir() and d.name.endswith('+')]
     symbols.sort()
@@ -185,11 +265,11 @@ def main():
         print("Nie znaleziono żadnych symboli do analizy.")
         return
     
-    print(f"Znaleziono {len(symbols)} symboli do analizy.")
+    print(f"\nZnaleziono {len(symbols)} symboli do analizy.")
     
-    # Przetwarzaj każdy symbol po kolei
+    # Przetwarzaj każdy symbol po kolei dla wybranej ramy czasowej
     for symbol in symbols:
-        if process_symbol(symbol):
+        if process_symbol(symbol, timeframe):
             print("\nZakończono działanie programu.")
             break
         
@@ -204,12 +284,15 @@ def main():
         print("\nZakończono analizę wszystkich symboli.")
 
 if __name__ == "__main__":
+    import json  # Dodaj import na początku bloku
     try:
         main()
     except KeyboardInterrupt:
         print("\n\nPrzerwano działanie programu przez użytkownika.")
     except Exception as e:
         print(f"\n\nWystąpił nieoczekiwany błąd: {e}")
+        import traceback
+        traceback.print_exc()
     finally:
         print("\nNaciśnij Enter, aby zakończyć...")
         input()
