@@ -3,14 +3,15 @@ import pandas as pd
 from datetime import datetime
 
 # Mapping of manual file extensions to target file extensions
-file_mapping = {
-    '1.csv': '_M1.csv',
-    '5.csv': '_M5.csv',
-    '15.csv': '_M15.csv',
-    '60.csv': '_H1.csv',
-    '240.csv': '_H4.csv',
-    '1440.csv': '_D1.csv'
-}
+# Note: The order is important - we check for the longest suffixes first
+file_mapping = [
+    ('1440.csv', '_D1.csv'),
+    ('240.csv', '_H4.csv'),
+    ('60.csv', '_H1.csv'),
+    ('15.csv', '_M15.csv'),  # Must be before '5.csv' to avoid partial matching
+    ('5.csv', '_M5.csv'),
+    ('1.csv', '_M1.csv')
+]
 
 # Base path to data directory
 BASE_DIR = r"C:\python\MT4_Trading_System\data\historical"
@@ -61,10 +62,12 @@ def merge_and_replace_data():
     for root, dirs, files in os.walk(BASE_DIR):
         for file in files:
             # Check if it's a manual file
-            for manual_suffix, auto_suffix in file_mapping.items():
+            for manual_suffix, auto_suffix in file_mapping:
                 if file.endswith(manual_suffix):
                     manual_path = os.path.join(root, file)
-                    auto_path = os.path.join(root, file.replace(manual_suffix, auto_suffix))
+                    # Replace the specific suffix we matched
+                    base_name = file[:-len(manual_suffix)]
+                    auto_path = os.path.join(root, f"{base_name}{auto_suffix}")
 
                     try:
                         # Read manual file - check if first row is header

@@ -6,120 +6,44 @@
   <component name="ChangeListManager">
     <list default="true" id="109f985b-61c7-4075-8dfb-9ccc166d919b" name="Changes" comment="Updated .csv 2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/AUDUSD+/D1/AUDUSD+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/AUDUSD+/D1/AUDUSD+_D1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/AUDUSD+/H4/AUDUSD+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/AUDUSD+/H4/AUDUSD+_H4.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/AUT20+/D1/AUT20+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/AUT20+/D1/AUT20+_D1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/AUT20+/H4/AUT20+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/AUT20+/H4/AUT20+_H4.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/historical/BRAComp+/D1/BRAComp+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/BRAComp+/D1/BRAComp+_D1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/BRAComp+/H1/BRAComp+_H1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/BRAComp+/H1/BRAComp+_H1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/BRAComp+/H4/BRAComp+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/BRAComp+/H4/BRAComp+_H4.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/BUND10Y+/D1/BUND10Y+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/BUND10Y+/D1/BUND10Y+_D1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/BUND10Y+/H4/BUND10Y+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/BUND10Y+/H4/BUND10Y+_H4.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/COCOA+/D1/COCOA+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/COCOA+/D1/COCOA+_D1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/COCOA+/H4/COCOA+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/COCOA+/H4/COCOA+_H4.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/COFFEE+/D1/COFFEE+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/COFFEE+/D1/COFFEE+_D1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/COFFEE+/H4/COFFEE+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/COFFEE+/H4/COFFEE+_H4.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/COPPER+/D1/COPPER+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/COPPER+/D1/COPPER+_D1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/COPPER+/H4/COPPER+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/COPPER+/H4/COPPER+_H4.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/CORN+/D1/CORN+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/CORN+/D1/CORN+_D1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/CORN+/H4/CORN+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/CORN+/H4/CORN+_H4.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/COTTONs+/D1/COTTONs+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/COTTONs+/D1/COTTONs+_D1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/COTTONs+/H4/COTTONs+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/COTTONs+/H4/COTTONs+_H4.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/CZKCASH+/D1/CZKCASH+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/CZKCASH+/D1/CZKCASH+_D1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/CZKCASH+/H1/CZKCASH+_H1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/CZKCASH+/H1/CZKCASH+_H1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/CZKCASH+/H4/CZKCASH+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/CZKCASH+/H4/CZKCASH+_H4.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/DE.30+/D1/DE.30+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/DE.30+/D1/DE.30+_D1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/DE.30+/H4/DE.30+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/DE.30+/H4/DE.30+_H4.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/historical/BRAComp+/M1/BRAComp+_M1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/BRAComp+/M1/BRAComp+_M1.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/historical/COFFEE+/M1/COFFEE+_M1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/COFFEE+/M1/COFFEE+_M1.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/historical/DE40+/D1/DE40+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/DE40+/D1/DE40+_D1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/DE40+/H1/DE40+_H1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/DE40+/H1/DE40+_H1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/DE40+/H4/DE40+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/DE40+/H4/DE40+_H4.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/historical/EMISS+/D1/EMISS+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/EMISS+/D1/EMISS+_D1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/EMISS+/H4/EMISS+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/EMISS+/H4/EMISS+_H4.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/historical/EU.50+/D1/EU.50+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/EU.50+/D1/EU.50+_D1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/EU.50+/H1/EU.50+_H1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/EU.50+/H1/EU.50+_H1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/EU.50+/H4/EU.50+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/EU.50+/H4/EU.50+_H4.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/EURCHF+/D1/EURCHF+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/EURCHF+/D1/EURCHF+_D1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/EURCHF+/H4/EURCHF+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/EURCHF+/H4/EURCHF+_H4.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/EURGBP+/D1/EURGBP+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/EURGBP+/D1/EURGBP+_D1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/EURGBP+/H4/EURGBP+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/EURGBP+/H4/EURGBP+_H4.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/EURJPY+/D1/EURJPY+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/EURJPY+/D1/EURJPY+_D1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/EURJPY+/H1/EURJPY+_H1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/EURJPY+/H1/EURJPY+_H1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/EURJPY+/H4/EURJPY+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/EURJPY+/H4/EURJPY+_H4.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/historical/EURUSD+/D1/EURUSD+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/EURUSD+/D1/EURUSD+_D1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/EURUSD+/H4/EURUSD+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/EURUSD+/H4/EURUSD+_H4.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/FRA.40+/D1/FRA.40+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/FRA.40+/D1/FRA.40+_D1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/FRA.40+/H4/FRA.40+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/FRA.40+/H4/FRA.40+_H4.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/GBPUSD+/D1/GBPUSD+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/GBPUSD+/D1/GBPUSD+_D1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/GBPUSD+/H4/GBPUSD+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/GBPUSD+/H4/GBPUSD+_H4.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/GOLDs+/D1/GOLDs+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/GOLDs+/D1/GOLDs+_D1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/GOLDs+/H1/GOLDs+_H1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/GOLDs+/H1/GOLDs+_H1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/GOLDs+/H4/GOLDs+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/GOLDs+/H4/GOLDs+_H4.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/historical/GOLDs+/M1/GOLDs+_M1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/GOLDs+/M1/GOLDs+_M1.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/historical/ITA.40+/D1/ITA.40+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/ITA.40+/D1/ITA.40+_D1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/ITA.40+/H4/ITA.40+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/ITA.40+/H4/ITA.40+_H4.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/MEXComp+/D1/MEXComp+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/MEXComp+/D1/MEXComp+_D1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/MEXComp+/H4/MEXComp+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/MEXComp+/H4/MEXComp+_H4.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/historical/MEXComp+/M1/MEXComp+_M1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/MEXComp+/M1/MEXComp+_M1.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/historical/NATGAS+/D1/NATGAS+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/NATGAS+/D1/NATGAS+_D1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/NATGAS+/H4/NATGAS+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/NATGAS+/H4/NATGAS+_H4.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/NED25+/D1/NED25+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/NED25+/D1/NED25+_D1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/NED25+/H4/NED25+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/NED25+/H4/NED25+_H4.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/historical/NICKEL+/D1/NICKEL+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/NICKEL+/D1/NICKEL+_D1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/NICKEL+/H4/NICKEL+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/NICKEL+/H4/NICKEL+_H4.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/NZDUSD+/D1/NZDUSD+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/NZDUSD+/D1/NZDUSD+_D1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/NZDUSD+/H4/NZDUSD+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/NZDUSD+/H4/NZDUSD+_H4.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/historical/NZDUSD+/M1/NZDUSD+_M1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/NZDUSD+/M1/NZDUSD+_M1.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/historical/OIL.WTI+/D1/OIL.WTI+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/OIL.WTI+/D1/OIL.WTI+_D1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/OIL.WTI+/H4/OIL.WTI+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/OIL.WTI+/H4/OIL.WTI+_H4.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/OILs+/D1/OILs+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/OILs+/D1/OILs+_D1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/OILs+/H4/OILs+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/OILs+/H4/OILs+_H4.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/historical/OIL.WTI+/H1/OIL.WTI+_H1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/OIL.WTI+/H1/OIL.WTI+_H1.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/historical/OIL.WTI+/M15/OIL.WTI+1_M5.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/historical/OIL.WTI+/M15/OIL.WTI+_M15.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/OIL.WTI+/M15/OIL.WTI+_M15.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/historical/OILs+/M1/OILs+_M1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/OILs+/M1/OILs+_M1.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/historical/PALLADIUM+/D1/PALLADIUM+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/PALLADIUM+/D1/PALLADIUM+_D1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/PALLADIUM+/H4/PALLADIUM+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/PALLADIUM+/H4/PALLADIUM+_H4.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/historical/PLATINUM+/D1/PLATINUM+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/PLATINUM+/D1/PLATINUM+_D1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/PLATINUM+/H4/PLATINUM+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/PLATINUM+/H4/PLATINUM+_H4.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/historical/SCHATZ2Y+/D1/SCHATZ2Y+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/SCHATZ2Y+/D1/SCHATZ2Y+_D1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/SCHATZ2Y+/H4/SCHATZ2Y+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/SCHATZ2Y+/H4/SCHATZ2Y+_H4.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/SILVERs+/D1/SILVERs+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/SILVERs+/D1/SILVERs+_D1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/SILVERs+/H4/SILVERs+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/SILVERs+/H4/SILVERs+_H4.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/SOYBEAN+/D1/SOYBEAN+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/SOYBEAN+/D1/SOYBEAN+_D1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/SOYBEAN+/H4/SOYBEAN+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/SOYBEAN+/H4/SOYBEAN+_H4.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/historical/SPA.35+/D1/SPA.35+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/SPA.35+/D1/SPA.35+_D1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/SPA.35+/H4/SPA.35+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/SPA.35+/H4/SPA.35+_H4.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/historical/SPA.35+/M1/SPA.35+_M1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/SPA.35+/M1/SPA.35+_M1.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/historical/SUGARs+/D1/SUGARs+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/SUGARs+/D1/SUGARs+_D1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/SUGARs+/H4/SUGARs+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/SUGARs+/H4/SUGARs+_H4.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/SUI20+/D1/SUI20+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/SUI20+/D1/SUI20+_D1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/SUI20+/H4/SUI20+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/SUI20+/H4/SUI20+_H4.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/historical/UK.100+/D1/UK.100+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/UK.100+/D1/UK.100+_D1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/UK.100+/H1/UK.100+_H1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/UK.100+/H1/UK.100+_H1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/UK.100+/H4/UK.100+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/UK.100+/H4/UK.100+_H4.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/historical/US.100+/D1/US.100+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/US.100+/D1/US.100+_D1.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/historical/US.100+/H1/US.100+_H1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/US.100+/H1/US.100+_H1.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/historical/US.100+/H4/US.100+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/US.100+/H4/US.100+_H4.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/historical/US.100+/M1/US.100+_M1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/US.100+/M1/US.100+_M1.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/historical/US.100+/M15/US.100+_M15.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/US.100+/M15/US.100+_M15.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/historical/US.100+/M5/US.100+_M5.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/US.100+/M5/US.100+_M5.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/historical/US.30+/D1/US.30+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/US.30+/D1/US.30+_D1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/US.30+/H4/US.30+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/US.30+/H4/US.30+_H4.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/historical/US.30+/M1/US.30+_M1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/US.30+/M1/US.30+_M1.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/historical/US.500+/D1/US.500+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/US.500+/D1/US.500+_D1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/US.500+/H4/US.500+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/US.500+/H4/US.500+_H4.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/historical/US2000+/D1/US2000+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/US2000+/D1/US2000+_D1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/US2000+/H1/US2000+_H1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/US2000+/H1/US2000+_H1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/US2000+/H4/US2000+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/US2000+/H4/US2000+_H4.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/USDCAD+/D1/USDCAD+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/USDCAD+/D1/USDCAD+_D1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/USDCAD+/H4/USDCAD+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/USDCAD+/H4/USDCAD+_H4.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/USDCHF+/D1/USDCHF+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/USDCHF+/D1/USDCHF+_D1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/USDCHF+/H4/USDCHF+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/USDCHF+/H4/USDCHF+_H4.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/historical/USDIDX+/D1/USDIDX+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/USDIDX+/D1/USDIDX+_D1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/USDIDX+/H4/USDIDX+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/USDIDX+/H4/USDIDX+_H4.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/USDJPY+/D1/USDJPY+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/USDJPY+/D1/USDJPY+_D1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/USDJPY+/H4/USDJPY+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/USDJPY+/H4/USDJPY+_H4.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/VIX+/D1/VIX+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/VIX+/D1/VIX+_D1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/VIX+/H4/VIX+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/VIX+/H4/VIX+_H4.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/W.20+/D1/W.20+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/W.20+/D1/W.20+_D1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/W.20+/H4/W.20+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/W.20+/H4/W.20+_H4.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/WHEAT+/D1/WHEAT+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/WHEAT+/D1/WHEAT+_D1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/WHEAT+/H1/WHEAT+_H1.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/WHEAT+/H4/WHEAT+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/WHEAT+/H4/WHEAT+_H4.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/ZINC+/D1/ZINC+_D1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/ZINC+/D1/ZINC+_D1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/historical/ZINC+/H4/ZINC+_H4.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/ZINC+/H4/ZINC+_H4.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/reports/m1_last_quotes_20250628_223904.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/reports/m5_last_quotes_20250629_091429.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/reports/m5_last_quotes_20250629_103704.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/data_validation/validate_csv_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/data_validation/validate_csv_data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/historical/USDJPY+/M1/USDJPY+_M1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/historical/USDJPY+/M1/USDJPY+_M1.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/historical/merge_manual_csvs.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/historical/merge_manual_csvs.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -160,79 +84,80 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python tests.Python tests for mt4_symbols_checker.test_symbol.executor": "Run",
-    "Python tests.Python tests for test_symbols.test_symbols_loaded.executor": "Run",
-    "Python tests.Python tests for test_symbols.test_timeframe_limits.executor": "Run",
-    "Python tests.Python tests in test_arima_analyzer.py.executor": "Run",
-    "Python tests.Python tests in test_command.py.executor": "Run",
-    "Python tests.Python tests in test_import.py.executor": "Run",
-    "Python tests.Python tests in test_mt4_push_recv.py.executor": "Run",
-    "Python tests.Python tests in test_ping.py.executor": "Run",
-    "Python tests.Python tests in test_port.py.executor": "Run",
-    "Python tests.Python tests in test_recv.py.executor": "Run",
-    "Python tests.Python tests in test_symbols.py.executor": "Run",
-    "Python.DWX_ZeroMQ_Connector_v2_0_1_RC8.executor": "Run",
-    "Python.Python Console.executor": "Run",
-    "Python.__init__.executor": "Debug",
-    "Python.analyze.executor": "Run",
-    "Python.arima_analysis.executor": "Run",
-    "Python.arima_analysis_eng.executor": "Run",
-    "Python.base_connector.executor": "Run",
-    "Python.clean_historical_data.executor": "Run",
-    "Python.command_sender.executor": "Run",
-    "Python.fetch_historical_for_all.executor": "Run",
-    "Python.fetch_launcher.executor": "Run",
-    "Python.fetch_launcher2.executor": "Run",
-    "Python.fetch_one_symbol.executor": "Run",
-    "Python.fetch_single.executor": "Run",
-    "Python.fetch_single_2 (1).executor": "Run",
-    "Python.fix_inconsistent_data.executor": "Run",
-    "Python.get_account_info.executor": "Run",
-    "Python.get_open_trades.executor": "Run",
-    "Python.historical_data (1).executor": "Run",
-    "Python.historical_data.executor": "Run",
-    "Python.historical_data_handler.executor": "Run",
-    "Python.inspect_csv.executor": "Run",
-    "Python.konwertuj_datę.executor": "Run",
-    "Python.live_data (1).executor": "Run",
-    "Python.live_data.executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.market_data_handler.executor": "Run",
-    "Python.merge_csv_by_time.executor": "Run",
-    "Python.merge_csv_files.executor": "Run",
-    "Python.merge_manual_csvs.executor": "Run",
-    "Python.move_m1_files.executor": "Run",
-    "Python.nazwy_symbol_z_plusem.executor": "Run",
-    "Python.open_trade.executor": "Run",
-    "Python.plot_historical_data.executor": "Run",
-    "Python.plot_instrument.executor": "Run",
-    "Python.plot_m1_data.executor": "Run",
-    "Python.plot_m5_data.executor": "Run",
-    "Python.print_last_timestamps.executor": "Run",
-    "Python.print_m1_last_quotes.executor": "Run",
-    "Python.print_m5_quotes.executor": "Run",
-    "Python.process_historical_data.executor": "Run",
-    "Python.remove_m1_except.executor": "Run",
-    "Python.run_mt4.executor": "Run",
-    "Python.scrap.executor": "Run",
-    "Python.send_heartbeat.executor": "Run",
-    "Python.trade_executor.executor": "Run",
-    "Python.trade_handler.executor": "Run",
-    "Python.trades_data.executor": "Run",
-    "Python.utils.executor": "Run",
-    "Python.validate_csv_data.executor": "Run",
-    "Python.verify_historical_data.executor": "Run",
-    "Python.verify_m1_m5_data.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "com.codeium.enabled": "true",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python tests.Python tests for mt4_symbols_checker.test_symbol.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for test_symbols.test_symbols_loaded.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for test_symbols.test_timeframe_limits.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in test_arima_analyzer.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in test_command.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in test_import.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in test_mt4_push_recv.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in test_ping.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in test_port.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in test_recv.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in test_symbols.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python.DWX_ZeroMQ_Connector_v2_0_1_RC8.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Python Console.executor&quot;: &quot;Run&quot;,
+    &quot;Python.__init__.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.analyze.executor&quot;: &quot;Run&quot;,
+    &quot;Python.arima_analysis.executor&quot;: &quot;Run&quot;,
+    &quot;Python.arima_analysis_eng.executor&quot;: &quot;Run&quot;,
+    &quot;Python.base_connector.executor&quot;: &quot;Run&quot;,
+    &quot;Python.clean_historical_data.executor&quot;: &quot;Run&quot;,
+    &quot;Python.command_sender.executor&quot;: &quot;Run&quot;,
+    &quot;Python.fetch_historical_for_all.executor&quot;: &quot;Run&quot;,
+    &quot;Python.fetch_launcher.executor&quot;: &quot;Run&quot;,
+    &quot;Python.fetch_launcher2.executor&quot;: &quot;Run&quot;,
+    &quot;Python.fetch_one_symbol.executor&quot;: &quot;Run&quot;,
+    &quot;Python.fetch_single.executor&quot;: &quot;Run&quot;,
+    &quot;Python.fetch_single_2 (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python.fix_inconsistent_data.executor&quot;: &quot;Run&quot;,
+    &quot;Python.get_account_info.executor&quot;: &quot;Run&quot;,
+    &quot;Python.get_open_trades.executor&quot;: &quot;Run&quot;,
+    &quot;Python.historical_data (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python.historical_data.executor&quot;: &quot;Run&quot;,
+    &quot;Python.historical_data_handler.executor&quot;: &quot;Run&quot;,
+    &quot;Python.inspect_csv.executor&quot;: &quot;Run&quot;,
+    &quot;Python.konwertuj_datę.executor&quot;: &quot;Run&quot;,
+    &quot;Python.live_data (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python.live_data.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.market_data_handler.executor&quot;: &quot;Run&quot;,
+    &quot;Python.merge_csv_by_time.executor&quot;: &quot;Run&quot;,
+    &quot;Python.merge_csv_files.executor&quot;: &quot;Run&quot;,
+    &quot;Python.merge_manual_csvs.executor&quot;: &quot;Run&quot;,
+    &quot;Python.move_m1_files.executor&quot;: &quot;Run&quot;,
+    &quot;Python.nazwy_symbol_z_plusem.executor&quot;: &quot;Run&quot;,
+    &quot;Python.open_trade.executor&quot;: &quot;Run&quot;,
+    &quot;Python.plot_historical_data.executor&quot;: &quot;Run&quot;,
+    &quot;Python.plot_historical_data_json.executor&quot;: &quot;Run&quot;,
+    &quot;Python.plot_instrument.executor&quot;: &quot;Run&quot;,
+    &quot;Python.plot_m1_data.executor&quot;: &quot;Run&quot;,
+    &quot;Python.plot_m5_data.executor&quot;: &quot;Run&quot;,
+    &quot;Python.print_last_timestamps.executor&quot;: &quot;Run&quot;,
+    &quot;Python.print_m1_last_quotes.executor&quot;: &quot;Run&quot;,
+    &quot;Python.print_m5_quotes.executor&quot;: &quot;Run&quot;,
+    &quot;Python.process_historical_data.executor&quot;: &quot;Run&quot;,
+    &quot;Python.remove_m1_except.executor&quot;: &quot;Run&quot;,
+    &quot;Python.run_mt4.executor&quot;: &quot;Run&quot;,
+    &quot;Python.scrap.executor&quot;: &quot;Run&quot;,
+    &quot;Python.send_heartbeat.executor&quot;: &quot;Run&quot;,
+    &quot;Python.trade_executor.executor&quot;: &quot;Run&quot;,
+    &quot;Python.trade_handler.executor&quot;: &quot;Run&quot;,
+    &quot;Python.trades_data.executor&quot;: &quot;Run&quot;,
+    &quot;Python.utils.executor&quot;: &quot;Run&quot;,
+    &quot;Python.validate_csv_data.executor&quot;: &quot;Run&quot;,
+    &quot;Python.verify_historical_data.executor&quot;: &quot;Run&quot;,
+    &quot;Python.verify_m1_m5_data.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\python\MT4_Trading_System\scripts\historical" />
@@ -242,7 +167,7 @@
       <recent name="C:\python\MT4_Trading_System\tools" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.fetch_launcher">
+  <component name="RunManager" selected="Python.fetch_single">
     <configuration name="fetch_launcher" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="MT4_Trading_System" />
       <option name="ENV_FILES" value="" />
@@ -257,28 +182,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/historical/fetch_launcher.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="fetch_launcher2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="MT4_Trading_System" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts/historical" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/historical/fetch_launcher2.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -309,7 +212,29 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="plot_instrument" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="merge_manual_csvs" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="MT4_Trading_System" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts/historical" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/historical/merge_manual_csvs.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="plot_historical_data_json" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="MT4_Trading_System" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -322,7 +247,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/analysis/plot_instrument.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/analysis/plot_historical_data_json.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -331,7 +256,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="validate_csv_data" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="send_heartbeat" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="MT4_Trading_System" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -340,11 +265,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts/data_validation" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts/heartbeat" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/data_validation/validate_csv_data.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/heartbeat/send_heartbeat.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -355,18 +280,18 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.fetch_launcher" />
-        <item itemvalue="Python.validate_csv_data" />
-        <item itemvalue="Python.plot_instrument" />
         <item itemvalue="Python.fetch_single" />
-        <item itemvalue="Python.fetch_launcher2" />
+        <item itemvalue="Python.send_heartbeat" />
+        <item itemvalue="Python.fetch_launcher" />
+        <item itemvalue="Python.merge_manual_csvs" />
+        <item itemvalue="Python.plot_historical_data_json" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-53e2683a6804-9cdd278e9d02-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-251.26094.141" />
+        <option value="bundled-python-sdk-4c141bd692a7-e2d783800521-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-251.26927.90" />
       </set>
     </attachedChunks>
   </component>
