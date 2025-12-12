@@ -92,21 +92,45 @@ class MT4MarketDataHandler(MT4BaseConnector):
         Creates a new CSV file if it doesn't exist, or appends to an existing one.
         The CSV will have columns: timestamp, bid, ask
         """
-        if symbol not in self.csv_writers:
-            filename = os.path.join(self.csv_output_dir, f"{symbol}.csv")
-            file_exists = os.path.exists(filename)
-
-            csv_file = open(filename, 'a', newline='')
+        if symbol in self.csv_writers:
+            return  # Already initialized
+            
+        try:
+            # Create the full file path
+            filename = os.path.join(os.path.abspath(self.csv_output_dir), f"{symbol}.csv")
+            
+            # Ensure the directory exists
+            os.makedirs(os.path.dirname(filename), exist_ok=True)
+            
+            # Check if file exists to determine if we need to write headers
+            file_exists = os.path.isfile(filename)
+            
+            # Open the file in append mode with newline='' to prevent extra newlines
+            csv_file = open(filename, 'a', newline='', encoding='utf-8')
             writer = csv.writer(csv_file)
-
+            
+            # Write headers if this is a new file
             if not file_exists:
                 writer.writerow(['timestamp', 'bid', 'ask'])
                 csv_file.flush()
-
+            
+            # Store the file and writer objects
             self.csv_files[symbol] = csv_file
             self.csv_writers[symbol] = writer
-            if self.verbose:
-                print(f"[CSV] Initialized writer for {symbol}")
+                
+        except Exception as e:
+            import traceback
+            error_msg = f"[ERROR] Failed to initialize CSV writer for {symbol}: {str(e)}\n{traceback.format_exc()}"
+            print(error_msg)
+            # Clean up if there was an error
+            if 'csv_file' in locals():
+                try:
+                    csv_file.close()
+                except:
+                    pass
+            # Remove from dictionaries to allow retry
+            self.csv_writers.pop(symbol, None)
+            self.csv_files.pop(symbol, None)
 
     def _save_to_csv(self, symbol, timestamp, bid, ask):
         """
@@ -118,17 +142,65 @@ class MT4MarketDataHandler(MT4BaseConnector):
             bid (float): Bid price
             ask (float): Ask price
             
-        Automatically initializes CSV writer if it doesn't exist for the symbol.
+        Returns:
+            bool: True if data was saved successfully, False otherwise
         """
+        if not self.save_to_csv:
+            return False
+            
         try:
+            # Get the full path where the file should be saved
+            filename = os.path.join(os.path.abspath(self.csv_output_dir), f"{symbol}.csv")
+            
+            # Initialize writer if it doesn't exist
             if symbol not in self.csv_writers:
                 self._init_csv_writer(symbol)
-
-            writer = self.csv_writers[symbol]
-            writer.writerow([timestamp, bid, ask])
-            self.csv_files[symbol].flush()
+                if symbol not in self.csv_writers:  # Check if initialization failed
+                    return False
+            
+            # Get the writer and file handle
+            writer = self.csv_writers.get(symbol)
+            csv_file = self.csv_files.get(symbol)
+            
+            if writer is None or csv_file is None:
+                print(f"[ERROR] Writer or file handle is None for {symbol}")
+                return False
+                
+            try:
+                # Write the data
+                writer.writerow([timestamp, bid, ask])
+                csv_file.flush()
+                os.fsync(csv_file.fileno())  # Force write to disk
+                return True
+                
+            except (IOError, OSError) as e:
+                print(f"[ERROR] File operation failed for {symbol}: {str(e)}")
+                # Try to reinitialize the writer and retry once
+                try:
+                    if symbol in self.csv_files:
+                        self.csv_files[symbol].close()
+                    
+                    # Reinitialize
+                    self.csv_writers.pop(symbol, None)
+                    self.csv_files.pop(symbol, None)
+                    self._init_csv_writer(symbol)
+                    
+                    if symbol in self.csv_writers and symbol in self.csv_files:
+                        writer = self.csv_writers[symbol]
+                        csv_file = self.csv_files[symbol]
+                        writer.writerow([timestamp, bid, ask])
+                        csv_file.flush()
+                        os.fsync(csv_file.fileno())
+                        return True
+                    
+                except Exception as retry_e:
+                    print(f"[ERROR] Retry failed for {symbol}: {str(retry_e)}")
+                    
+                return False
+                
         except Exception as e:
-            print(f"[CSV ERROR] Failed to save data for {symbol}: {str(e)}")
+            print(f"[ERROR] Unexpected error saving {symbol} data: {str(e)}")
+            return False
 
     def subscribe(self, symbol='US.100+'):
         """
@@ -139,7 +211,7 @@ class MT4MarketDataHandler(MT4BaseConnector):
         """
         self.sub_sock.setsockopt_string(zmq.SUBSCRIBE, symbol)
         if self.verbose:
-            print(f"[KERNEL] Subscribed to {symbol} updates")
+            pass  # Removed verbose subscription messages
 
     def subscribe_all(self):
         """
@@ -175,37 +247,46 @@ class MT4MarketDataHandler(MT4BaseConnector):
         """
         Process incoming market data messages from the stream.
         
-        This method is called automatically for each message received on the
-        subscribed socket. It parses the message, updates the in-memory data
-        structure, and optionally saves to CSV.
-        
         Expected message format: "SYMBOL:|:BID;ASK"
-        
-        Args:
-            msg (str): The raw message from the market data stream
         """
+        if not msg or self.main_delimiter not in msg:
+            return
+
         try:
-            timestamp = str(Timestamp.now('UTC'))[:-6]
-
-            if self.main_delimiter in msg:
-                symbol, data = msg.split(self.main_delimiter)
-                if self.msg_delimiter in data:
-                    parts = data.split(self.msg_delimiter)
-                    if len(parts) == 2:
-                        bid, ask = float(parts[0]), float(parts[1])
-
-                        # Update in-memory data
-                        if symbol not in self.market_data:
-                            self.market_data[symbol] = {}
-                        self.market_data[symbol][timestamp] = (bid, ask)
-
-                        if self.verbose:
-                            print(f"\n[{symbol}] {timestamp} ({bid}/{ask}) BID/ASK")
-
-                        if self.save_to_csv:
-                            self._save_to_csv(symbol, timestamp, bid, ask)
+            # Parse the message
+            symbol, data = msg.split(self.main_delimiter, 1)
+            bid, ask = map(float, data.split(self.msg_delimiter))
+            
+            # Get current timestamp
+            timestamp = Timestamp.now()
+            
+            # Store in memory
+            if symbol not in self.market_data:
+                self.market_data[symbol] = []
+            
+            self.market_data[symbol].append({
+                'timestamp': timestamp,
+                'bid': bid,
+                'ask': ask
+            })
+            
+            # Save to CSV if enabled
+            if self.save_to_csv:
+                success = self._save_to_csv(symbol, timestamp, bid, ask)
+                if not success and self.verbose:
+                    print(f"\n[WARNING] Failed to save data for {symbol}")
+            
+            # Display the update if verbose mode is on
+            if self.verbose:
+                # Truncate the bid/ask to 5 decimal places for display
+                bid_str = f"{bid:.5f}".rstrip('0').rstrip('.')
+                ask_str = f"{ask:.5f}".rstrip('0').rstrip('.')
+                print(f"[{symbol}] {timestamp} ({bid_str}/{ask_str}) BID/ASK")
+                
         except Exception as e:
-            self.logger.error(f"[STREAM ERROR] Error processing stream message: {e}")
+            if self.verbose:
+                print(f"\n[ERROR] Failed to process message '{msg}': {str(e)}")
+            return
 
     def shutdown(self):
         """
