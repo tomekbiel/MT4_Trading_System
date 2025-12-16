@@ -45,23 +45,23 @@ def run_mode(choice: str) -> None:
     """
     if choice == "1":
         # Run heartbeat test to verify connection
-        from scripts.heartbeat.send_heartbeat import main as heartbeat_main
+        from heartbeat.send_heartbeat import main as heartbeat_main
         heartbeat_main()
 
     elif choice == "2":
         # Start live market data streaming
-        from scripts.live.live_data import main as live_main
+        from live.live_data import main as live_main
         live_main()
 
     elif choice == "3":
         # Process historical market data
-        from scripts.historical.fetch_single_2 import main as hist_main
+        from historical.fetch_single_2 import main as hist_main
         hist_main()
 
     elif choice == "4":
         # Execute trade-related operations
-        from scripts.trades.get_account_info import main as account_info_main
-        from scripts.trades.get_open_trades import main as open_trades_main
+        from trades.get_account_info import main as account_info_main
+        from trades.get_open_trades import main as open_trades_main
 
         console.print("\n[bold magenta]🔹 Fetching account information...[/bold magenta]")
         account_info_main()
@@ -87,3 +87,12 @@ def main():
 
 if __name__ == "__main__":
     main()
+# Option 1: Run Manually (When Needed)
+# cd C:\python\MT4_Trading_System & "C:\ProgramData\anaconda3\python.exe" "scripts\run_mt4.py" live 2
+# powershell
+# # Start
+# Start-ScheduledTask -TaskName "MT4 Trading System"
+#
+# # Stop
+# Stop-ScheduledTask -TaskName "MT4 Trading System"
+#5

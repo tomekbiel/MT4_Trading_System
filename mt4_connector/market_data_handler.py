@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import datetime
+
 """
 MT4 Market Data Handler - Real-time market data processing and storage.
 
@@ -65,6 +67,8 @@ class MT4MarketDataHandler(MT4BaseConnector):
         self.csv_files = {}
         self.msg_delimiter = ';'
         self.main_delimiter = ':|:'
+        # Initialize raw data callback as None
+        self.raw_data_callback = None  # Add this line
 
 
         if self.save_to_csv:
@@ -95,6 +99,9 @@ class MT4MarketDataHandler(MT4BaseConnector):
         if symbol in self.csv_writers:
             return  # Already initialized
             
+        # Initialize csv_file variable in case we need to close it in the except block
+        csv_file = None
+        
         try:
             # Create the full file path
             filename = os.path.join(os.path.abspath(self.csv_output_dir), f"{symbol}.csv")
@@ -117,90 +124,138 @@ class MT4MarketDataHandler(MT4BaseConnector):
             # Store the file and writer objects
             self.csv_files[symbol] = csv_file
             self.csv_writers[symbol] = writer
-                
+            
         except Exception as e:
             import traceback
             error_msg = f"[ERROR] Failed to initialize CSV writer for {symbol}: {str(e)}\n{traceback.format_exc()}"
             print(error_msg)
+            
             # Clean up if there was an error
-            if 'csv_file' in locals():
+            if csv_file is not None:
                 try:
                     csv_file.close()
-                except:
-                    pass
+                except Exception as close_error:
+                    print(f"[WARNING] Failed to close CSV file for {symbol}: {close_error}")
+                    
             # Remove from dictionaries to allow retry
             self.csv_writers.pop(symbol, None)
             self.csv_files.pop(symbol, None)
 
-    def _save_to_csv(self, symbol, timestamp, bid, ask):
+
+
+    def _save_to_csv(self, symbol, timestamp, bid, ask, max_retries=3, retry_delay=0.1):
         """
-        Save market data to CSV file.
+        Save market data to CSV file with error handling and retries.
         
         Args:
             symbol (str): Trading symbol
             timestamp (str): Timestamp of the data point
             bid (float): Bid price
             ask (float): Ask price
+            max_retries (int): Maximum number of retry attempts (default: 3)
+            retry_delay (float): Delay between retries in seconds (default: 0.1)
             
         Returns:
             bool: True if data was saved successfully, False otherwise
         """
-        if not self.save_to_csv:
+        if not self.save_to_csv or not hasattr(self, 'csv_output_dir'):
             return False
             
-        try:
-            # Get the full path where the file should be saved
-            filename = os.path.join(os.path.abspath(self.csv_output_dir), f"{symbol}.csv")
-            
-            # Initialize writer if it doesn't exist
-            if symbol not in self.csv_writers:
-                self._init_csv_writer(symbol)
-                if symbol not in self.csv_writers:  # Check if initialization failed
-                    return False
-            
-            # Get the writer and file handle
-            writer = self.csv_writers.get(symbol)
-            csv_file = self.csv_files.get(symbol)
-            
-            if writer is None or csv_file is None:
-                print(f"[ERROR] Writer or file handle is None for {symbol}")
-                return False
-                
+        last_error = None
+        
+        for attempt in range(max_retries + 1):  # +1 for the initial attempt
             try:
-                # Write the data
+                # Initialize CSV writer if it doesn't exist for this symbol
+                if symbol not in self.csv_writers:
+                    self._init_csv_writer(symbol)
+                
+                # Skip if writer initialization failed
+                if symbol not in self.csv_writers or symbol not in self.csv_files:
+                    print(f"[WARNING] Failed to initialize CSV writer for {symbol}")
+                    return False
+                
+                # Get writer and file handle
+                writer = self.csv_writers[symbol]
+                csv_file = self.csv_files[symbol]
+                
+                # Write data
                 writer.writerow([timestamp, bid, ask])
                 csv_file.flush()
-                os.fsync(csv_file.fileno())  # Force write to disk
+                os.fsync(csv_file.fileno())
                 return True
                 
             except (IOError, OSError) as e:
-                print(f"[ERROR] File operation failed for {symbol}: {str(e)}")
-                # Try to reinitialize the writer and retry once
+                last_error = e
+                if attempt < max_retries:
+                    print(f"[WARNING] File operation failed for {symbol} (attempt {attempt + 1}/{max_retries}): {str(e)}")
+                    time.sleep(retry_delay)
+                    
+                    # Try to reinitialize the writer on error
+                    try:
+                        if symbol in self.csv_files:
+                            try:
+                                self.csv_files[symbol].close()
+                            except:
+                                pass
+                        
+                        self.csv_writers.pop(symbol, None)
+                        self.csv_files.pop(symbol, None)
+                        self._init_csv_writer(symbol)
+                    except Exception as init_error:
+                        print(f"[WARNING] Failed to reinitialize CSV writer for {symbol}: {str(init_error)}")
+                        
+            except Exception as e:
+                last_error = e
+                print(f"[ERROR] Unexpected error saving {symbol} data: {str(e)}")
+                if attempt >= max_retries:
+                    break
+                time.sleep(retry_delay)
+        
+        # If we get here, all retries failed
+        error_msg = f"[ERROR] Failed to save {symbol} data after {max_retries + 1} attempts"
+        if last_error:
+            error_msg += f": {str(last_error)}"
+        print(error_msg)
+        return False
+
+    # ====== ADD THESE NEW METHODS NEW MODIFICATION ======
+    def set_raw_data_callback(self, callback_func):
+        """
+        Set a callback function to receive raw MT4 data.
+        The callback will receive the raw message string from MT4.
+        """
+        self.raw_data_callback = callback_func
+
+    def _process_message(self, message):
+        """Process incoming message from MT4 with raw data forwarding"""
+        try:
+            print(f"[DEBUG] _process_message called with message: {message[:100]}..." if len(str(message)) > 100 else f"[DEBUG] _process_message called with message: {message}")
+            print(f"[DEBUG] raw_data_callback is set: {self.raw_data_callback is not None}")
+            
+            # Call raw data callback if set
+            if self.raw_data_callback is not None:
                 try:
-                    if symbol in self.csv_files:
-                        self.csv_files[symbol].close()
-                    
-                    # Reinitialize
-                    self.csv_writers.pop(symbol, None)
-                    self.csv_files.pop(symbol, None)
-                    self._init_csv_writer(symbol)
-                    
-                    if symbol in self.csv_writers and symbol in self.csv_files:
-                        writer = self.csv_writers[symbol]
-                        csv_file = self.csv_files[symbol]
-                        writer.writerow([timestamp, bid, ask])
-                        csv_file.flush()
-                        os.fsync(csv_file.fileno())
-                        return True
-                    
-                except Exception as retry_e:
-                    print(f"[ERROR] Retry failed for {symbol}: {str(retry_e)}")
-                    
-                return False
-                
+                    print("[DEBUG] Calling raw_data_callback...")
+                    self.raw_data_callback(message)
+                    print("[DEBUG] raw_data_callback completed")
+                except Exception as e:
+                    print(f"[RAW DATA ERROR] In callback: {str(e)}")
+                    import traceback
+                    traceback.print_exc()
+            else:
+                print("[DEBUG] No raw_data_callback set")
+
+            # Call parent class implementation with explicit class reference
+            print("[DEBUG] Calling parent _process_message...")
+            super(MT4MarketDataHandler, self)._process_message(message)
+            print("[DEBUG] Parent _process_message completed")
         except Exception as e:
-            print(f"[ERROR] Unexpected error saving {symbol} data: {str(e)}")
-            return False
+            print(f"[ERROR] Processing message: {str(e)}")
+            if self.verbose:
+                import traceback
+                traceback.print_exc()
+
+    # ====== END OF ADDED CODE - END OF MODIFICATION ======
 
     def subscribe(self, symbol='US.100+'):
         """
@@ -249,44 +304,48 @@ class MT4MarketDataHandler(MT4BaseConnector):
         
         Expected message format: "SYMBOL:|:BID;ASK"
         """
-        if not msg or self.main_delimiter not in msg:
-            return
-
+        # Call raw data callback if set
+        if hasattr(self, 'raw_data_callback') and self.raw_data_callback is not None:
+            try:
+                self.raw_data_callback(msg)
+            except Exception as e:
+                self.logger.error(f"Error in raw_data_callback: {str(e)}")
+                
         try:
-            # Parse the message
-            symbol, data = msg.split(self.main_delimiter, 1)
-            bid, ask = map(float, data.split(self.msg_delimiter))
-            
+            if not msg:
+                return
+
+            # Split the message into parts
+            try:
+                symbol, data = msg.split(self.main_delimiter, 1)
+                bid, ask = data.split(';')
+                bid = float(bid)
+                ask = float(ask)
+            except (ValueError, AttributeError) as e:
+                self.logger.error(f"Invalid message format: {msg} - {str(e)}")
+                return
+
             # Get current timestamp
-            timestamp = Timestamp.now()
-            
+            timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]
+
             # Store in memory
             if symbol not in self.market_data:
                 self.market_data[symbol] = []
-            
-            self.market_data[symbol].append({
-                'timestamp': timestamp,
-                'bid': bid,
-                'ask': ask
-            })
-            
+            self.market_data[symbol].append((timestamp, bid, ask))
+
             # Save to CSV if enabled
             if self.save_to_csv:
-                success = self._save_to_csv(symbol, timestamp, bid, ask)
-                if not success and self.verbose:
-                    print(f"\n[WARNING] Failed to save data for {symbol}")
-            
-            # Display the update if verbose mode is on
+                self._save_to_csv(symbol, timestamp, bid, ask)
+
+            # Print to console if verbose
             if self.verbose:
-                # Truncate the bid/ask to 5 decimal places for display
-                bid_str = f"{bid:.5f}".rstrip('0').rstrip('.')
-                ask_str = f"{ask:.5f}".rstrip('0').rstrip('.')
-                print(f"[{symbol}] {timestamp} ({bid_str}/{ask_str}) BID/ASK")
-                
+                print(f"[{symbol}] {timestamp} ({bid}/{ask}) BID/ASK")
+
         except Exception as e:
+            self.logger.error(f"Error in _process_stream_message: {str(e)}")
             if self.verbose:
-                print(f"\n[ERROR] Failed to process message '{msg}': {str(e)}")
-            return
+                import traceback
+                traceback.print_exc()
 
     def shutdown(self):
         """
